@@ -1,21 +1,32 @@
-import { useEffect, useState } from 'react';
+import {useEffect, useState} from "react";
 
-function Timer({ initialState }) {
-    const [counter, setCounter] = useState(initialState);
+function Timer({initialValue}) {
+    const [counter, setCounter] = useState(initialValue);
+    const [stopCounting, setStopCounting] = useState(false);
 
     useEffect(() => {
-        const interval = setInterval(() => {
-            setCounter(prevState => prevState + 1);
-            console.log('cyk');
-        }, 1000);
+        if (counter !== 0 && !stopCounting) {
+            const timeout = setTimeout(() => {
+                setCounter(prevState => prevState - 1);
+            }, 1000);
 
-        return () => {
-            clearInterval(interval);
-            console.log('unmoount');
-        };
-    }, []);
+            return () => clearTimeout(timeout);
+        }
+    });
 
-    return <div>Counting: {counter}</div>;
+    return (
+        <>
+            <div> {counter ? `Pozostało: ${counter}` : 'Koniec czasu!'}</div>
+            {counter !== 0 && (
+                <>
+                    <button onClick={() => setStopCounting(!stopCounting)}>
+                        {stopCounting ? 'Wznów odliczanie' : 'Zatrzymaj odliczanie!'}
+                    </button>
+                    <button onClick={() => setCounter(initialValue)}>Reset</button>
+                </>
+            )}
+        </>
+    );
 }
 
-export { Timer };
+export {Timer}

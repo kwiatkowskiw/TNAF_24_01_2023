@@ -10,7 +10,7 @@ function App() {
     return (
         <>
             <button onClick={() => handleClick()}>{showTimer ? 'Hide timer' : 'show timer'}</button>
-            {showTimer && <Timer initialState={0} />}
+            {showTimer && <Timer initialValue={10} />}
         </>
     );
 }
