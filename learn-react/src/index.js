@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 import {Timer} from './components/Timer/Timer';
 import {InputText} from "./components/InputText/InputText";
+import {ModalColor} from "./components/ModalColor/ModalColor";
 
 function App() {
     const [showTimer, setShowTimer] = useState(false);
@@ -14,6 +15,9 @@ function App() {
             {showTimer && <Timer initialValue={10}/>}
             <div>
                 <InputText/>
+            </div>
+            <div>
+                <ModalColor/>
             </div>
         </>
     );
